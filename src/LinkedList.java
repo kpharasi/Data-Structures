@@ -84,6 +84,60 @@ public class LinkedList {
 		
 		prev.next = temp.next;  
 	}
+	
+	// function to delete entire list
+	public void deleteList() {
+		head = null;
+	}
+	
+	// function to find length of linked list - iterative
+	public int listLength() {
+		Node curr = head;
+		int res = 0;
+		
+		while(curr!=null) {
+			res++;
+			curr = curr.next;
+		}
+		
+		return res;
+	}
+
+	// function to find length of linked list - iterative
+	public int listRecLength(Node head) {
+		if(head == null) {
+			return 0;
+		}
+		
+		return 1 + listRecLength(head.next);
+	}
+	
+	// function to find if element present - iterative
+	public boolean findElem(int key) {
+		Node curr = head;
+		
+		while(curr!=null) {
+			if(curr.value == key) {
+				return true;
+			}
+			curr = curr.next;
+		}
+		
+		return false;
+	}
+
+	// function to find if element present - iterative
+	public boolean findRecElem(Node head, int key) {
+		if(head == null) {
+			return false;
+		}
+		
+		if(head.value == key) {
+			return true;
+		}
+		
+		return findRecElem(head.next, key);
+	}
 
 	public static void main(String[] args) {
 		// Empty list
@@ -103,6 +157,15 @@ public class LinkedList {
 		
 		System.out.print("\nLinked List after deletion: ");
 		list.printList();
+		
+		int len = list.listLength();
+		int len1 = list.listRecLength(list.head);
+		
+		System.out.printf("\nLength of Linked List: %d", len);
+		System.out.printf("\nLength of Linked List: %d", len1);
+		
+		System.out.printf("\nElement in Linked List: %b", list.findElem(8));
+		System.out.printf("\nElement in Linked List: %b", list.findRecElem(list.head, 9));
 	}
 
 }
